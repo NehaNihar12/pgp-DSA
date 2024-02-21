@@ -1,0 +1,29 @@
+package org.example.stackAndQueue;
+
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Test {
+
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        while (n-- > 0)
+            stack.push(s.nextInt());
+        int temp = stack.pop();
+        insertAtBottom(stack,temp,stack.size());
+        System.out.println(stack);
+    }
+    static void insertAtBottom(Stack<Integer> stack, int temp,int n) {
+        if (n == 0)
+            stack.push(temp);
+        else {
+            int temp2 = stack.pop();
+            // Remove all the elements except the first ceil(n/2) elements of the original stack
+            insertAtBottom(stack, temp,n - 1);
+            // Push all the integers held in function call stack once the integer is inserted at the (ceil(n/2)+1)th position
+            stack.push(temp2);
+        }
+    }
+}
